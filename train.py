@@ -71,19 +71,25 @@ for epoch in range(n_epochs):
     time_start = time.time()
     train_loss = models.train(model, dataloader_train, loss_fn, optimizer)
     time_end = time.time()
-    print(f'    training loss: {train_loss} ({time_end-time_start:.3f}s)') 
+    print(f'    training loss: {train_loss:.3f} ({time_end-time_start:.3f}s)') 
     train_loss_log.append(train_loss)
 
+    time_start = time.time()
     val_loss = models.test(model, dataloader_train, loss_fn)
-    print(f'    validation loss: {val_loss}') 
+    time_end = time.time()
+    print(f'    validation loss: {val_loss:.3f} ({time_end-time_start:.3f}s)') 
     val_loss_log.append(val_loss)
 
+    time_start = time.time()
     train_acc = models.test_accuracy(model, dataloader_train)
-    print(F'    training accuracy: {train_acc*100:.3f}%')
+    time_end = time.time()
+    print(F'    training accuracy: {train_acc*100:.3f}% ({time_end-time_start:.3f}s)')
     train_acc_log.append(train_acc)
 
+    time_start = time.time()
     val_acc = models.test_accuracy(model, dataloader_test)
-    print(F'    validation accuracy: {val_acc*100:.3f}%')
+    time_end = time.time()
+    print(F'    validation accuracy: {val_acc*100:.3f}% ({time_end-time_start:.3f}s)')
     val_acc_log.append(val_acc)
 
 # グラフを表示
