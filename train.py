@@ -42,15 +42,13 @@ dataloader_test = torch.utils.data.DataLoader(
     batch_size=batch_size
 )
 
-# バッチを取り出す実験
-# この後の処理では不要なので、確認したら削除してよい
-# for image_batch, label_batch in dataloader_test:
-#     print(image_batch.shape)
-#     print(label_batch.shape)
-#    break  # 1つ目で終了
+# GPU か CPU を自動的に選ぶ
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 # モデルのインスタンスを作成
 model = models.MyModel()
+# モデルを選んだデバイスに転送する
+model.to(device)
 
 # 損失関数 (誤差関数・ロス関数) の選択
 loss_fn = torch.nn.CrossEntropyLoss()
